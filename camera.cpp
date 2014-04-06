@@ -6,9 +6,6 @@ wrblack
 */
 #include "ray.h"
 
-//default constructor
-camera_t::camera_t() {}
-
 //overloaded constructor
 camera_t::camera_t(FILE *in)
 {
@@ -44,10 +41,10 @@ void camera_t::getdir(int x, int y, vec_t *dir)
 	
 	world->x = (double) x / (pixel_dim[X] - 1) * (world_dim[X]);
 	world->y = (double) y / (pixel_dim[Y] - 1) * (world_dim[Y]);
-	world->z = 0;
+	world->z = 0.0;
 	
 	vec_diff(view_point, world, dir);
-	assert(world->z < 0);
+	//assert(world->z < 0);
 	
 	vec_unit(dir, dir);
 }
@@ -79,11 +76,12 @@ int camera_t::getydim(void)
 
 void camera_t::getviewpt(vec_t *view)
 {
-	//
+	vec_copy(&view_point, view)
 }
 
 void camera_t::camera_print(FILE *out)
 {
+	/*
 	assert(cookie == CAM_COOKIE);
 	fprintf(out, "camera %11s\n", name);
 
@@ -92,7 +90,20 @@ void camera_t::camera_print(FILE *out)
 	fprintf(out, "worlddim  %8.1f %5.1f\n", world_dim[X], world_dim[Y]);
 
 	fprintf(out, "viewpoint  %7.1f %5.1f %5.1f\n", 
-		view_point.x, view_point.y, view_point.z);	
+		view_point.x, view_point.y, view_point.z);
+	*/
+	
+	//cleaner output
+	fprintf(out, "%-12s %s\n", "camera", name);
+	
+	fprintf(out, "%-12s %5d %5d \n", "pixel_dim", 
+			pixel_dim[0], pixel_dim[1]);
+	fprintf(out, "%-12s %5.1lf %5.1lf \n", "world_dim",
+			world_dim[0], world_dim[1]);
+	fprintf(out, "%-12s %5.1lf %5.1lf %5.1lf\n",
+			"view_point", view_point.x, view_point.y,
+			view_point.z);
+	fprintf(out, "\n");
 }
 
 void camera_t::camera_write_image(FILE *out)
@@ -111,7 +122,8 @@ void camera_t::camera_write_image(FILE *out)
 	
 	//fwrite(cam->pixmap, sizeof(irgb_t), 
 	//	cam->pixel_dim[X] * cam->pixel_dim[Y], out);
-	fwrite(cam->pixmap, sizeof(irgb_t), w * h, out);
+	//fwrite(pixmap, 3, w * h, out);
+	fwrite(pixmap, sizeof(irgb_t), w * h, out);
 }
 
 //need to ask about this one
