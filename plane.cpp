@@ -1,4 +1,14 @@
+//Ryan Becwar
+
 #include "ray.h"
+
+pparm_t plane_parse[] =
+{
+	{"point", 3, sizeof(double), "%lf", 0}
+	{"normal", 3, sizeof(double), "%lf", 0}
+}
+
+#define NUM_ATTRS (sizeof(plane_parse) / sizeof(pparm_t))
 
 plane_t::plane_t(FILE *in, model_t *model, int attrmax):object_t(in, model){
 
