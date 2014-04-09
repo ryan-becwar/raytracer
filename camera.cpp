@@ -30,11 +30,16 @@ camera_t::camera_t(FILE *in)
 	
 	cookie = CAM_COOKIE;
 	
+	//using parser, point it to pixel_dim via camera_parse[0] 
+	//where loc describes address of attribute name
 	camera_parse[0].loc = &pixel_dim;
 	camera_parse[1].loc = &world_dim;
 	camera_parse[2].loc = &view_point;
 	
+	//invoking the parser, which reads all attribute names and values
+	//in other words, this is camera_t's load attribute function
 	mask = parser(in, camera_parse, NUM_ATTRS, 0);
+	//bare minimum 7 attributes needed to parse, 2 from pixel_dim, 2 from world_dim, 3 from view_point: 7
 	assert(mask == 7);
 	
 	//allocate a pixmap to hold the ppm image data
@@ -140,7 +145,7 @@ void camera_t::camera_write_image(FILE *out)
 //need to ask about this one
 void camera_t::getpixsize(double *x, double *y)
 {
-	
+	//to be done later (not needed for SP2)
 }
 
 
