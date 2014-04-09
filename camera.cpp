@@ -6,6 +6,17 @@ wrblack
 */
 #include "ray.h"
 
+//for parser
+//pparm_t = {attrname, numvals, valsize, fmtstr, loc}
+pparm_t camera_parse[] =
+{
+	{"pixeldim", 2, sizeof(int), "%d", 0},
+	{"worlddim", 2, sizeof(double), "%lf", 0},
+	{"viewpoint", 3, sizeof(double), "%lf", 0}
+};
+
+#define NUM_ATTRS ( sizeof(camera_prase) / sizeof(pparm_t) ) //3/1 = 3
+
 //overloaded constructor
 camera_t::camera_t(FILE *in)
 {
