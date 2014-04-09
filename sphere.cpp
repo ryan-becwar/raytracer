@@ -3,6 +3,14 @@
 
 #include "ray.h"
 
+pparm_t sphere_parse[] =
+{
+	{"center", 3, sizeof(double), "%lf", 0}
+	{"radius", 1, sizeof(double), "%lf", 0}
+}
+
+#define NUM_ATTRS (sizeof(sphere_parse) / sizeof(pparm_t))
+
 //overloaded constructor
 sphere_t::sphere_t(FILE *in, model_t *model, int attrmax): object_t(in, model)
 {
