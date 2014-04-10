@@ -4,11 +4,11 @@
 
 pparm_t plane_parse[] =
 {
-	{"point", 3, sizeof(double), "%lf", 0}
+	{"point", 3, sizeof(double), "%lf", 0},
 	{"normal", 3, sizeof(double), "%lf", 0}
-}
+};
 
-#define NUM_ATTRS (sizeof(plane_parse) / sizeof(pparm_t))
+#define NUM_ATTRS (sizeof(plane_parse) / sizeof(pparm_t));
 
 plane_t::plane_t(FILE *in, model_t *model, int attrmax):object_t(in, model){
 
@@ -28,7 +28,7 @@ plane_t::plane_t(FILE *in, model_t *model, int attrmax):object_t(in, model){
 }
 
 
-virtual double plane_t::hits(vec_t *base, vec_t* dir){
+double plane_t::hits(vec_t *base, vec_t* dir){
 
 	double ndotd;
 	double t;
@@ -48,8 +48,8 @@ virtual double plane_t::hits(vec_t *base, vec_t* dir){
 	if (t <= 0)
 		return(-1);
 
-	vec_scale(t, dir, &last_hit);
-	vec_sum(&last_hit, base, &last_hit);
+	vec_scale(t, dir, &last_hitpt);
+	vec_sum(&last_hit, base, &last_hitpt);
 
 	if ((last_hit.z > 0.01) && (strcmp(obj_type, "projector")))
 		return(-1);
@@ -57,7 +57,7 @@ virtual double plane_t::hits(vec_t *base, vec_t* dir){
 	return(t);
 }
 
-virtual void plane_t::printer(FILE *out){
+void plane_t::printer(FILE *out){
 
 	fprintf(out, "%-12s %5.1lf %5.1lf %5.1lf\n", "normal", normal.x, normal.y, normal.z);
 	fprintf(out, "%-12s %5.1lf %5.1lf %5.1lf\n", "point", point.x, point.y, point.z);

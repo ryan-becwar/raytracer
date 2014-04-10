@@ -5,9 +5,9 @@
 
 pparm_t sphere_parse[] =
 {
-	{"center", 3, sizeof(double), "%lf", 0}
+	{"center", 3, sizeof(double), "%lf", 0},
 	{"radius", 1, sizeof(double), "%lf", 0}
-}
+};
 
 #define NUM_ATTRS (sizeof(sphere_parse) / sizeof(pparm_t))
 
@@ -56,7 +56,7 @@ double sphere_t::hits(vec_t *base, vec_t *dir)
         vec_scale(dist, dir, &hit);
         vec_sum(base, &hit, &hit);
 
-        obj->last_hit = hit;
+        last_hitpt = hit;
 
         vec_diff(&center, &hit, &normal);
         vec_unit(&normal, &normal);
