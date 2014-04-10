@@ -36,6 +36,41 @@ sphere_t::sphere_t(FILE *in, model_t *model, int attrmax): object_t(in, model)
 
 double sphere_t::hits(vec_t *base, vec_t *dir)
 {
+
+	//Brought over from C code, this should work
+        double a, b, c, discrim, dist;
+
+        vec_t newBase, hit, normal;
+        vec_diff(base, &center, &newBase);
+
+        a = vec_dot(dir, dir);
+        b = 2 * vec_dot(&newBase, dir);
+        c = vec_dot(&newBase, &newBase) - (radius * radius);
+
+        discrim = ((b * b) - (4*a*c));
+        if(discrim <= 0)
+                return -1;
+
+        dist = ((-1 * b) - sqrt(discrim)) / (2 * a);
+
+        vec_scale(dist, dir, &hit);
+        vec_sum(base, &hit, &hit);
+
+        obj->last_hit = hit;
+
+        vec_diff(&center, &hit, &normal);
+        vec_unit(&normal, &normal);
+
+        last_normal = normal;
+
+        // extract sph pointer from object structure
+        // see notes for sphere_hits function
+
+        // return distance
+        return(dist);
+
+
+
 	//WIP!!
 	/*
 	vec_t hit, sdir, hitdir, vloc;
