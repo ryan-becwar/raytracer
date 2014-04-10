@@ -42,7 +42,7 @@ void ray_trace (
 	
 	*/
 	
-	closest = find_closest_object(model->objs, base, dir, last_hit, &mindist);
+	closest = find_closest_object(model, base, dir, last_hit, &mindist);
 	
 	if (closest == NULL)
 		return;
