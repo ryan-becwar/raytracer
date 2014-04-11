@@ -126,19 +126,7 @@ void camera_t::getviewpt(vec_t *view)
 
 void camera_t::camera_print(FILE *out)
 {
-	/*
-	assert(cookie == CAM_COOKIE);
-	fprintf(out, "camera %11s\n", name);
 
-	fprintf(out, "pixeldim %9d %5d\n", pixel_dim[X], pixel_dim[Y]);
-
-	fprintf(out, "worlddim  %8.1f %5.1f\n", world_dim[X], world_dim[Y]);
-
-	fprintf(out, "viewpoint  %7.1f %5.1f %5.1f\n", 
-		view_point.x, view_point.y, view_point.z);
-	*/
-	
-	//cleaner output
 	fprintf(out, "%-12s %s\n", "camera", name);
 	
 	fprintf(out, "%-12s %5d %5d \n", "pixel_dim", 

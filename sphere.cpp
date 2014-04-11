@@ -130,8 +130,9 @@ double sphere_t::hits(vec_t *base, vec_t *dir)
 
 void sphere_t::printer(FILE *out)
 {
-	//any need to call object_t's printer?
-	//format taken from camera.cpp
+
+	fprintf(out, "%-12s %s\n", "sphere", getobjname());
+	fprintf(out, "%-12s %s\n", "material", mat->material_getname());
 	fprintf(out, "%-12s %5.1lf %5.1lf %5.1lf \n", "center",
 			center.x, center.y, center.z);
 	fprintf(out, "%-12s %5.1lf \n", "radius", radius);
