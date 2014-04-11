@@ -61,6 +61,8 @@ double plane_t::hits(vec_t *base, vec_t* dir){
 
 void plane_t::printer(FILE *out){
 
+	fprintf(out, "%-12s %s\n", "plane", getobjname());
+	fprintf(out, "%-12s %s\n", "material", mat->material_getname());
 	fprintf(out, "%-12s %5.1lf %5.1lf %5.1lf\n", "normal", normal.x, normal.y, normal.z);
 	fprintf(out, "%-12s %5.1lf %5.1lf %5.1lf\n", "point", point.x, point.y, point.z);
 }
