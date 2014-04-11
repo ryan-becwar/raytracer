@@ -16,7 +16,7 @@ void ray_trace (
    double total_dist,          // distance ray has travelled so far
    object_t *last_hit)         // most recently hit object
 {
-	object_t *obj;
+	object_t *closest = NULL;
 	double mindist;
 	drgb_t thispix = {0.0, 0.0, 0.0};
 	
@@ -37,18 +37,18 @@ void ray_trace (
 	assert(obj != NULL);
 
 	// get the distance and the color
-	dist = obj->hits(obj, base, dir);  
+	dist = obj->hits(obj, base, dir);
 	obj->ambient(obj, obj->mat, &thispix);
-	
+
 	*/
-	
-	closest = find_closest_object(model, base, dir, last_hit, &mindist);
-	
-	if (closest == NULL)
-		return;
-	
-	//get ambient and store in thispix
-	obj->getambient(&thispix);
+
+	closest = find_closest_object(model, *base, *dir, last_hit, &mindist);
+
+	if (closest != NULL)
+		//get ambient and store in thispix
+		closest->getambient(&thispix);
+
+
 
 	if(mindist > 0){
 		total_dist += mindist;
@@ -60,25 +60,28 @@ void ray_trace (
 
 //=============================================================================
 // ******* make_pixel( ) *******
-// 
-// 
+//
+//
 //=============================================================================
 void make_pixel(model_t  *model, int  x, int  y) {
 	vec_t raydir;
 	drgb_t pix = {0.0, 0.0, 0.0};
+	vec_t *viewpt = NULL;
 	camera_t *cam = model->cam;
 
-	camera_getdir(cam, x, y, &raydir);
+	cam->getviewpt(viewpt);
+
+	cam->getdir(x, y, &raydir);
 	//	fprintf(stderr, "camera get dir ran in makepixel\n");
 
 
 	/*  The ray_trace function determines the pixel color in */
 	/*  d_rgb units.   The last two parameters are used ONLY */
 	/*  in the case of specular (bouncing) rays              */
-	ray_trace(model, &cam->view_point, &raydir, &pix, 0.0, NULL);
+	ray_trace(model, viewpt, &raydir, &pix, 0.0, NULL);
 	//	fprintf(stderr, "ray trace ran in make pixel\n");
 
-	camera_store_pixel(cam, x, y, &pix);
+	cam->store_pixel(x, y, &pix);
 	//	fprintf(stderr, "camera store pixel ran in make pixel\n");
 
 	return;
@@ -97,7 +100,7 @@ void make_row(model_t  *model, int  y)
 
 	/*  for each pixel in the row, invoke make_pixel() */
 	/*  to paint the pixel.                            */
-	for (x = 0; x < cam->pixel_dim[0]; x++) {
+	for (x = 0; x < cam->getxdim(); x++) {
 		make_pixel(model, x, y);
 	}
 }
@@ -116,13 +119,13 @@ void image_create(model_t  *model, FILE  *out)
 	/*  fire rays through each pixel in the window; */
 	/*  for each row, invoke make_row() to paint    */
 	/*  the row of pixels.                          */
-	for (y = 0; y < cam->pixel_dim[1]; y++) {
+	for (y = 0; y < cam->getydim(); y++) {
 		make_row(model, y);
 	}
 
 
 	fprintf(stderr, "for loop in image create ran\n");
 	/*  write the image                           */
-	camera_write_image(model->cam, out);
+	cam->camera_write_image(out);
 }
 
