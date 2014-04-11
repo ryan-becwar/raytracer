@@ -29,8 +29,8 @@ static pparm_t mat_parse[] =
    {"ambient",      3, 8, "%lf", 0},
    {"diffuse",      3, 8, "%lf", 0},
    {"specular",     1, 8, "%lf", 0},
-   {"shininess",    1, 8, "%lf", 0},
-   {"transparency", 1, 8, "%lf", 0},
+//   {"shininess",    1, 8, "%lf", 0},
+//   {"transparency", 1, 8, "%lf", 0},
 };
 
 #define NUM_ATTRS (sizeof(mat_parse) / sizeof(pparm_t))
@@ -59,8 +59,8 @@ material_t::material_t(FILE  *in, model_t  *model, int  attrmax) {
    mat_parse[0].loc = &ambient;
    mat_parse[1].loc = &diffuse;
    mat_parse[2].loc = &specular;
-   mat_parse[3].loc = &shininess;
-   mat_parse[4].loc = &transparency;
+//   mat_parse[3].loc = &shininess;
+//   mat_parse[4].loc = &transparency;
 
 	// calls the generic parser
    mask = parser(in, mat_parse, NUM_ATTRS, 0);
@@ -143,10 +143,10 @@ void material_t::material_print(FILE  *out) {
    fprintf(out, "%-12s %5.1lf \n\n", "specular",
                  specular);
 
-   fprintf(out, "%-12s %5.1lf \n\n", "shininess",
-                 shininess);
-   fprintf(out, "%-12s %5.1lf \n\n", "transparency",
-                 transparency);
+//   fprintf(out, "%-12s %5.1lf \n\n", "shininess",
+//                 shininess);
+//   fprintf(out, "%-12s %5.1lf \n\n", "transparency",
+//                 transparency);
 }
 
 
@@ -187,16 +187,16 @@ void material_t::material_getspecular(double  *spec) {
 // getter function for shine value
 //	  uses assignment instead of returning
 //=============================================================================
-void material_t::material_getshine(double  *shiny) {
-   *shiny = shininess;
-}
+//void material_t::material_getshine(double  *shiny) {
+//   *shiny = shininess;
+//}
 
 
 //=============================================================================
 // getter function for transparency value
 //	  uses assignment instead of returning
 //=============================================================================
-void material_t::material_gettrans(double  *trans) {
-   *trans = transparency;
-}
+//void material_t::material_gettrans(double  *trans) {
+//   *trans = transparency;
+//}
 
