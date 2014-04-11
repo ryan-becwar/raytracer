@@ -1,5 +1,5 @@
-RAYOBJS = main.o camera.o list.o  model.o material.o object.o plane.o \
-          parser.o  vector.o pixel.o image.o raytrace.o pplane.o\
+RAYOBJS = main.o  list.o camera.o model.o material.o object.o plane.o \
+          parser.o  vector.o pixel.o image.o raytrace.o\
           sphere.o
 #         pplane.o tplane.o light.o sphere.o fplane.o
 #         revsurf.o texplane.o texture.o \

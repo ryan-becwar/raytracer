@@ -23,6 +23,9 @@ void make_row(model_t  *, int );
 
 void image_create(model_t  *, FILE  *);
 
+/* == raytrace.c == */
+object_t *find_closest_object(model_t *model, vec_t base, vec_t dir,
+	object_t *last_hit, double *retdist);
 
 /*==  parser.c ==  */
 int parser(

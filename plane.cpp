@@ -8,7 +8,7 @@ pparm_t plane_parse[] =
 	{"normal", 3, sizeof(double), "%lf", 0}
 };
 
-#define NUM_ATTRS (sizeof(plane_parse) / sizeof(pparm_t));
+#define NUM_ATTRS (sizeof(plane_parse) / sizeof(pparm_t))
 
 plane_t::plane_t(FILE *in, model_t *model, int attrmax):object_t(in, model){
 
@@ -18,7 +18,9 @@ plane_t::plane_t(FILE *in, model_t *model, int attrmax):object_t(in, model){
 
 	plane_parse[0].loc = &point;
 	plane_parse[1].loc = &normal;
-	mask = parser(in, plane_parse, NUM_ATTRS, attrmax);
+//	mask = parser(in, &plane_parse, NUM_ATTRS, attrmax);
+        mask = parser(in, plane_parse, NUM_ATTRS, attrmax);
+
 	assert(mask == 3);
 
 	vec_unit(&normal, &normal);
@@ -49,9 +51,9 @@ double plane_t::hits(vec_t *base, vec_t* dir){
 		return(-1);
 
 	vec_scale(t, dir, &last_hitpt);
-	vec_sum(&last_hit, base, &last_hitpt);
+	vec_sum(&last_hitpt, base, &last_hitpt);
 
-	if ((last_hit.z > 0.01) && (strcmp(obj_type, "projector")))
+	if ((last_hitpt.z > 0.01) && (strcmp(obj_type, "projector")))
 		return(-1);
 
 	return(t);
