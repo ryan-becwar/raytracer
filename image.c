@@ -20,28 +20,6 @@ void ray_trace (
 	double mindist;
 	drgb_t thispix = {0.0, 0.0, 0.0};
 	
-	/*ryans old code
-	
-	//* Get the object (plane or sphere).        
-	//* Later we will use find_closest_object()  
-	//* to get the closest object                
-	//	list_reset(model->objs);
-	//	assert(list_get_entity(model->objs) != NULL);
-
-	//	fprintf(stderr, "before obj assignment from objs listran\n");
-	obj = (object_t *)list_get_entity(model->objs);
-	//	fprintf(stderr, "after obj assignment\n");
-
-	//	obj = (object_t *)find_closest_object(model, *base, *dir, last_hit, &dist);
-	//	fprintf(stderr, "after obj assignment\n");
-	assert(obj != NULL);
-
-	// get the distance and the color
-	dist = obj->hits(obj, base, dir);
-	obj->ambient(obj, obj->mat, &thispix);
-
-	*/
-
 	closest = find_closest_object(model, *base, *dir, last_hit, &mindist);
 
 	if (closest != NULL)
