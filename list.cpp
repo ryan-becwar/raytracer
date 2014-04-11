@@ -119,7 +119,8 @@ list_t::~list_t()
 
 }
 
-
+//Commenting out these functions as not included in ray.h
+/*
 void list_t::insert(void *entity){
 
 	link_t * link = new link_t(entity);
@@ -199,3 +200,4 @@ void list_t::remove(void){
 		}
 	}
 }
+*/

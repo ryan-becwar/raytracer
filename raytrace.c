@@ -32,16 +32,17 @@ object_t *find_closest_object(model_t *model, vec_t base, vec_t dir,
 
 	// process entire list of objects to see if any are hit by the ray
 	// how do you process a list??
-	list_reset(model->objs);
+	model->objs->reset();
+//	list_reset(model->objs);
 
-	while(list_not_end(model->objs)){
-		curobj = (object_t *)list_get_entity(model->objs);
+	while(model->objs->not_end()){
+		curobj = (object_t *)model->objs->get_entity();
 
 
 		// 	if current object from the list is not the last_hit,
 		//			get the distance
 		if(curobj != last_hit){
-			*retdist = curobj->hits(curobj, &base, &dir);
+			*retdist = curobj->hits(&base, &dir);
 
 			if((*retdist >= 0) && ((mindist <= 0) || (*retdist < mindist))){
 				mindist = *retdist;
@@ -53,7 +54,7 @@ object_t *find_closest_object(model_t *model, vec_t base, vec_t dir,
 		//				- - then remember that distance in mindist
 		// 			- - and remember that object in minobj
 
-		list_next_link(model->objs); 
+		model->objs->next_link();
 
 	}
 
