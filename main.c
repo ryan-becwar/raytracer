@@ -23,11 +23,9 @@ char *argv[])
    assert(model != NULL);
 
    model->print(stderr);
-	fprintf(stderr, "model print ran\n");
 
 	/* Raytrace the image */
    image_create(model, out);
-	fprintf(stderr, "model print ran\n");
 
    return(0);
 }

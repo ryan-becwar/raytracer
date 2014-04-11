@@ -98,14 +98,10 @@ void image_create(model_t  *model, FILE  *out)
 	/*  for each row, invoke make_row() to paint    */
 	/*  the row of pixels.                          */
 
-	fprintf(stderr, "for loop in image create not yet ran\n");
-
 	for (y = 0; y < cam->getydim(); y++) {
 		make_row(model, y);
 	}
 
-
-	fprintf(stderr, "for loop in image create ran\n");
 	/*  write the image                           */
 	cam->camera_write_image(out);
 }
