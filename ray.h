@@ -35,6 +35,7 @@ class camera_t
    	void camera_print(FILE *out);
    	void camera_write_image(FILE *out);
    	void getpixsize(double *x, double *y);
+   	void scale_and_clamp(drgb_t *drgb);
 
 	private:  // member variables
    	int    cookie;
