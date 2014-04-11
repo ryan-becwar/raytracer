@@ -81,6 +81,42 @@ void camera_t::store_pixel(int x, int y, drgb_t *pix)
 	maploc->b = (unsigned char)pix->b;
 }
 
+void camera_t::scale_and_clamp(drgb_t *drgb)
+{
+	/*
+	convert the drgb_t values to irgb_t values by 
+	scaling each r, g, b value by 255 and then 
+	adding .5 to it; and then clamping those values so 
+	that none are less than 0 or greater than 255
+	*/
+	drgb_t *temp;
+	vec_copy(drgb, temp);
+	vec_scale(255, drgb->r, temp->r);
+	vec_scale(255, drgb->g, temp->g);
+	vec_scale(255, drgb->b, temp->b);
+	vec_sum(0.5, drgb->r, temp->r);
+	vec_sum(0.5, drgb->g, temp->g);
+	vec_sum(0.5, drgb->b, temp->b);
+	
+	//I feel this can be optimized
+	if (temp->r > 255)
+		temp->r = 255;
+	else if (temp->r < 0.0)
+		temp->r = 0.0;
+		
+	if (temp->g > 255)
+		temp->g = 255;
+	else if (temp->g < 0.0)
+		temp->g = 0.0;
+		
+	if (temp->b > 255)
+		temp->b = 255;
+	else if (temp->b < 0.0)
+		temp->b = 0.0;
+		
+	vec_copy(temp, drgb);
+}
+
 int camera_t::getxdim(void)
 {
 	return( pixel_dim[0] );
