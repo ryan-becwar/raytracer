@@ -89,32 +89,24 @@ void camera_t::scale_and_clamp(drgb_t *drgb)
 	adding .5 to it; and then clamping those values so 
 	that none are less than 0 or greater than 255
 	*/
-	drgb_t *temp;
-	vec_copy(drgb, temp);
-	vec_scale(255, drgb->r, temp->r);
-	vec_scale(255, drgb->g, temp->g);
-	vec_scale(255, drgb->b, temp->b);
-	vec_sum(0.5, drgb->r, temp->r);
-	vec_sum(0.5, drgb->g, temp->g);
-	vec_sum(0.5, drgb->b, temp->b);
+	drgb->r = drgb->r * 255 + 0.5;
+	drgb->g = drgb->g * 255 + 0.5;
+	drgb->b = drgb->b * 255 + 0.5;
+
+	if (drgb->r > 255)
+		drgb->r = 255;
+	else if (drgb->r < 0.0)
+		drgb->r = 0.0;
 	
-	//I feel this can be optimized
-	if (temp->r > 255)
-		temp->r = 255;
-	else if (temp->r < 0.0)
-		temp->r = 0.0;
+	if (drgb->g > 255)
+		drgb->g = 255;
+	else if (drgb->g < 0.0)
+		drgb->g = 0.0;
 		
-	if (temp->g > 255)
-		temp->g = 255;
-	else if (temp->g < 0.0)
-		temp->g = 0.0;
-		
-	if (temp->b > 255)
-		temp->b = 255;
-	else if (temp->b < 0.0)
-		temp->b = 0.0;
-		
-	vec_copy(temp, drgb);
+	if (drgb->b > 255)
+		drgb->b = 255;
+	else if (drgb->b < 0.0)
+		drgb->b = 0.0;
 }
 
 int camera_t::getxdim(void)
