@@ -37,8 +37,8 @@ void model_t::model_load_entity(FILE  *in, char  *entity) {
    else if (strcmp(entity, "plane") == 0)
       new plane_t(in, this, 0);
 
-   else if (strcmp(entity, "pplane") == 0)
-      new pplane_t(in, this, 0);
+//   else if (strcmp(entity, "pplane") == 0)
+//      new pplane_t(in, this, 0);
 
 	/*
    else if (strcmp(entity, "fplane") == 0)
