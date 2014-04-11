@@ -44,7 +44,7 @@ void ray_trace (
 void make_pixel(model_t  *model, int  x, int  y) {
 	vec_t raydir;
 	drgb_t pix = {0.0, 0.0, 0.0};
-	vec_t *viewpt = NULL;
+	vec_t *viewpt = (vec_t *)malloc(sizeof(vec_t));
 	camera_t *cam = model->cam;
 
 	cam->getviewpt(viewpt);
@@ -97,6 +97,9 @@ void image_create(model_t  *model, FILE  *out)
 	/*  fire rays through each pixel in the window; */
 	/*  for each row, invoke make_row() to paint    */
 	/*  the row of pixels.                          */
+
+	fprintf(stderr, "for loop in image create not yet ran\n");
+
 	for (y = 0; y < cam->getydim(); y++) {
 		make_row(model, y);
 	}

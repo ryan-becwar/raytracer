@@ -52,13 +52,13 @@ void object_t::getspecular(double *spec) {
    mat->material_getspecular(spec);
 }
 
-void object_t::getshine(double *shiny) {
-   mat->material_getshine(shiny);
-}
+//void object_t::getshine(double *shiny) {
+//   mat->material_getshine(shiny);
+//}
 
-void object_t::gettrans(double *trans) {
-   mat->material_gettrans(trans);
-}
+//void object_t::gettrans(double *trans) {
+//   mat->material_gettrans(trans);
+//}
 
 inline void object_t::printer(FILE  *out) {
    assert(cookie == OBJ_COOKIE);
