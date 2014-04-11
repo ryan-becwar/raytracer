@@ -15,7 +15,7 @@ pparm_t camera_parse[] =
 	{"viewpoint", 3, sizeof(double), "%lf", 0}
 };
 
-#define NUM_ATTRS ( sizeof(camera_prase) / sizeof(pparm_t) ) //3/1 = 3
+#define NUM_ATTRS ( sizeof(camera_parse) / sizeof(pparm_t) ) //3/1 = 3
 
 //overloaded constructor
 camera_t::camera_t(FILE *in)
@@ -59,7 +59,7 @@ void camera_t::getdir(int x, int y, vec_t *dir)
 	world->y = (double) y / (pixel_dim[Y] - 1) * (world_dim[Y]);
 	world->z = 0.0;
 	
-	vec_diff(view_point, world, dir);
+	vec_diff(&view_point, world, dir);
 	//assert(world->z < 0);
 	
 	vec_unit(dir, dir);
@@ -72,7 +72,8 @@ void camera_t::store_pixel(int x, int y, drgb_t *pix)
 	
 	maprow = pixel_dim[1] - y - 1;
 	maploc = pixmap + maprow * pixel_dim[0] + x;
-	
+
+	//Where does this function come from?
 	scale_and_clamp(pix);
 	
 	maploc->r = (unsigned char)pix->r;
@@ -92,7 +93,7 @@ int camera_t::getydim(void)
 
 void camera_t::getviewpt(vec_t *view)
 {
-	vec_copy(&view_point, view)
+	vec_copy(&view_point, view);
 }
 
 void camera_t::camera_print(FILE *out)
@@ -124,7 +125,7 @@ void camera_t::camera_print(FILE *out)
 
 void camera_t::camera_write_image(FILE *out)
 {
-	assert(cam->cookie == CAM_COOKIE);
+	assert(cookie == CAM_COOKIE);
 
 	int w = pixel_dim[X];
 	int h = pixel_dim[Y];

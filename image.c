@@ -51,7 +51,7 @@ void ray_trace (
 	obj->getambient(&thispix);
 
 	if(mindist > 0){
-		total_dist += dist;
+		total_dist += mindist;
 		pix_scale((1/total_dist), &thispix, &thispix);
 		pix_sum(&thispix, pix, pix);
 	}
