@@ -41,7 +41,8 @@ double sphere_t::hits(vec_t *base, vec_t *dir)
         double a, b, c, discrim, dist;
 
         vec_t newBase, hit, normal;
-        vec_diff(base, &center, &newBase);
+        //vec_diff(base, &center, &newBase);
+		vec_diff(&center, base, &newBase);
 
         a = vec_dot(dir, dir);
         b = 2 * vec_dot(&newBase, dir);
