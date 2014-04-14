@@ -37,21 +37,21 @@ void model_t::model_load_entity(FILE  *in, char  *entity) {
    else if (strcmp(entity, "plane") == 0)
       new plane_t(in, this, 0);
 
-//   else if (strcmp(entity, "pplane") == 0)
-//      new pplane_t(in, this, 0);
+   else if (strcmp(entity, "pplane") == 0)
+      new pplane_t(in, this, 0);
 
-	/*
+
    else if (strcmp(entity, "fplane") == 0)
       new fplane_t(in, this, 0);
-	*/
+
 
     else if (strcmp(entity, "sphere") == 0)
        new sphere_t(in, this, 0);
 
-	/*
+
     else if (strcmp(entity, "light") == 0)
        new light_t(in, this, 0);
-	*/
+
 
     else {
        fprintf(stderr, "bad entity %s \n", entity);
@@ -83,6 +83,6 @@ void model_t::print(FILE  *out) {
    cam->camera_print(out);
    material_list_print(this, out);
    object_list_print(this, out);
-   // light_list_print(this, out);
+    light_list_print(this, out);
 }
 

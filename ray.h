@@ -86,8 +86,8 @@ class material_t
    	void   material_getambient(drgb_t   *dest);
    	void   material_getdiffuse(drgb_t  *dest);
    	void   material_getspecular(double  *spec);
-//   	void   material_getshine(double *shiny);
-//   	void   material_gettrans(double *trans);
+   	void   material_getshine(double *shiny);
+   	void   material_gettrans(double *trans);
    	char   *material_getname();
    	void   material_print(FILE *out);
 	
@@ -97,8 +97,8 @@ class material_t
    	drgb_t  ambient;         /* Reflectivity for materials  */
    	drgb_t  diffuse;
    	double  specular;
-//   	double  shininess;
-//   	double  transparency;
+   	double  shininess;
+   	double  transparency;
 };
 
 
@@ -140,8 +140,8 @@ class object_t
    	virtual  void   getambient(drgb_t *);
    	virtual  void   getdiffuse(drgb_t *);
    	virtual  void   getspecular(double *);
-//   	virtual  void   gettrans(double *);
-//   	virtual  void   getshine(double *);
+   	virtual  void   gettrans(double *);
+   	virtual  void   getshine(double *);
 	
 	protected:
    	vec_t   last_hitpt;         /* Last hit point              */
